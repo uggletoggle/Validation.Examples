@@ -37,7 +37,13 @@ namespace Validation.Data
             Id = 1,
             Name = "John",
             Email = "john@testmail.com",
-            Address = "123 Main St"
+            Address = new()
+            {
+                Street = "123 Main St",
+                City = "New York",
+                State = "NY",
+                ZipCode = "12345"
+            }
         };
 
         private static Customer Jane() => new Customer
@@ -45,7 +51,13 @@ namespace Validation.Data
             Id = 2,
             Name = "Jane",
             Email = "jane@testmail.com",
-            Address = "456 Main St"
+            Address = new()
+            {
+                Street = "456 Main St",
+                City = "New York",
+                State = "NY",
+                ZipCode = "456789"
+            }
         };
         #endregion
     }

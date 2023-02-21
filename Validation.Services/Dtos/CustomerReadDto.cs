@@ -1,4 +1,4 @@
-﻿namespace Validation.Domain
+﻿namespace Validation.Services.Dtos
 {
     public class CustomerReadDto
     {
@@ -8,6 +8,6 @@
 
         public string Name { get; set; }
 
-        public string Address { get; set; }
+        public AddressDto Address { get; set; }
     }
 }

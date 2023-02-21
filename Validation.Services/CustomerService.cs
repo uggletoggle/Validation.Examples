@@ -1,7 +1,7 @@
-﻿using System.Text.RegularExpressions;
-using Validation.Data;
+﻿using Validation.Data;
 using Validation.Domain;
 using Validation.Domain.Responses;
+using Validation.Services.Dtos;
 using Validation.Services.Validators;
 
 namespace Validation.Services
@@ -22,7 +22,7 @@ namespace Validation.Services
 
             if (!validationResult.IsValid)
                 return CustomerResult.Failure(validationResult.Errors.Select(e => e.ErrorMessage).ToArray(), errorCode: 400);
-            
+
             //if (customer is null)
             //    return CustomerResult.Failure(new[] { "Customer object is required" }, errorCode: 400);
 
@@ -54,10 +54,10 @@ namespace Validation.Services
 
             if (!validationResult.IsValid)
                 return CustomerResult.Failure(validationResult.Errors.Select(e => e.ErrorMessage).ToArray(), errorCode: 400);
-            
+
             var entityToEdit = _repo.GetById(id);
 
-            if(entityToEdit is null)
+            if (entityToEdit is null)
                 return CustomerResult.Failure(new[] { $"Customer not found for Id:{id}" }, errorCode: 404);
 
             var customerEntity = MapToEntity(customer);
@@ -78,7 +78,13 @@ namespace Validation.Services
             {
                 Name = customer.Name,
                 Email = customer.Email,
-                Address = customer.Address
+                Address = new()
+                {
+                    City = customer.Address.City,
+                    Street = customer.Address.Street,
+                    ZipCode = customer.Address.ZipCode,
+                    State = customer.Address.State
+                }
             };
         }
 
@@ -89,7 +95,13 @@ namespace Validation.Services
                 Id = customer.Id,
                 Name = customer.Name,
                 Email = customer.Email,
-                Address = customer.Address
+                Address = new()
+                {
+                    City = customer.Address.City,
+                    Street = customer.Address.Street,
+                    ZipCode = customer.Address.ZipCode,
+                    State = customer.Address.State
+                }
             };
         }
 
