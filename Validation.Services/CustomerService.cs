@@ -2,6 +2,7 @@
 using Validation.Data;
 using Validation.Domain;
 using Validation.Domain.Responses;
+using Validation.Services.Validators;
 
 namespace Validation.Services
 {
@@ -16,22 +17,28 @@ namespace Validation.Services
 
         public CustomerResult CreateCustomer(CustomerCreateDto customer)
         {
-            if (customer is null)
-                return CustomerResult.Failure(new[] { "Customer object is required" }, errorCode: 400);
-            
-            if(string.IsNullOrEmpty(customer.Name))
-                return CustomerResult.Failure(new[] { "Name is required" }, errorCode: 400);
-            
-            if(string.IsNullOrEmpty(customer.Email))
-                return CustomerResult.Failure(new[] { "Email is required" }, errorCode: 400);
-            
-            if(string.IsNullOrEmpty(customer.Address))
-                return CustomerResult.Failure(new[] { "Address is required" }, errorCode: 400);
+            var validator = new CustomerCreateDtoValidator();
+            var validationResult = validator.Validate(customer);
 
-            // regex for email
-            var regexEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            if (!regexEmail.IsMatch(customer.Email))
-                return CustomerResult.Failure(new[] { "Email is not valid" }, errorCode: 400);
+            if (!validationResult.IsValid)
+                return CustomerResult.Failure(validationResult.Errors.Select(e => e.ErrorMessage).ToArray(), errorCode: 400);
+            
+            //if (customer is null)
+            //    return CustomerResult.Failure(new[] { "Customer object is required" }, errorCode: 400);
+
+            //if(string.IsNullOrEmpty(customer.Name))
+            //    return CustomerResult.Failure(new[] { "Name is required" }, errorCode: 400);
+
+            //if(string.IsNullOrEmpty(customer.Email))
+            //    return CustomerResult.Failure(new[] { "Email is required" }, errorCode: 400);
+
+            //if(string.IsNullOrEmpty(customer.Address))
+            //    return CustomerResult.Failure(new[] { "Address is required" }, errorCode: 400);
+
+            //// regex for email
+            //var regexEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            //if (!regexEmail.IsMatch(customer.Email))
+            //    return CustomerResult.Failure(new[] { "Email is not valid" }, errorCode: 400);
 
             var customerEntity = MapToEntity(customer);
             _repo.Create(customerEntity);
@@ -41,24 +48,13 @@ namespace Validation.Services
 
         public CustomerResult EditCustomer(int id, CustomerCreateDto customer)
         {
-                
-            if (customer is null)
-                return CustomerResult.Failure(new[] { "Customer object is required" }, errorCode: 400);
 
-            if (string.IsNullOrEmpty(customer.Name))
-                return CustomerResult.Failure(new[] { "Name is required" }, errorCode: 400);
+            var validator = new CustomerCreateDtoValidator();
+            var validationResult = validator.Validate(customer);
 
-            if (string.IsNullOrEmpty(customer.Email))
-                return CustomerResult.Failure(new[] { "Email is required" }, errorCode: 400);
-
-            if (string.IsNullOrEmpty(customer.Address))
-                return CustomerResult.Failure(new[] { "Address is required" }, errorCode: 400);
-
-            // regex for email
-            var regexEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            if (!regexEmail.IsMatch(customer.Email))
-                return CustomerResult.Failure(new[] { "Email is not valid" }, errorCode: 400);
-
+            if (!validationResult.IsValid)
+                return CustomerResult.Failure(validationResult.Errors.Select(e => e.ErrorMessage).ToArray(), errorCode: 400);
+            
             var entityToEdit = _repo.GetById(id);
 
             if(entityToEdit is null)

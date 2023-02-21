@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Validation_Simple": {
+    "Validation_FluentValidation": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
