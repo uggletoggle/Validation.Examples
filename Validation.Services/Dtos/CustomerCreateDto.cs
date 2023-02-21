@@ -1,4 +1,4 @@
-﻿namespace Validation.Domain
+﻿namespace Validation.Services.Dtos
 {
     public class CustomerCreateDto
     {

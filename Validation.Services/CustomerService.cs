@@ -1,7 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 using Validation.Data;
 using Validation.Domain;
-using Validation.Domain.Responses;
+using Validation.Services.Dtos;
+using Validation.Services.Responses;
 
 namespace Validation.Services
 {
@@ -18,14 +19,14 @@ namespace Validation.Services
         {
             if (customer is null)
                 return CustomerResult.Failure(new[] { "Customer object is required" }, errorCode: 400);
-            
-            if(string.IsNullOrEmpty(customer.Name))
+
+            if (string.IsNullOrEmpty(customer.Name))
                 return CustomerResult.Failure(new[] { "Name is required" }, errorCode: 400);
-            
-            if(string.IsNullOrEmpty(customer.Email))
+
+            if (string.IsNullOrEmpty(customer.Email))
                 return CustomerResult.Failure(new[] { "Email is required" }, errorCode: 400);
-            
-            if(string.IsNullOrEmpty(customer.Address))
+
+            if (string.IsNullOrEmpty(customer.Address))
                 return CustomerResult.Failure(new[] { "Address is required" }, errorCode: 400);
 
             // regex for email
@@ -41,7 +42,7 @@ namespace Validation.Services
 
         public CustomerResult EditCustomer(int id, CustomerCreateDto customer)
         {
-                
+
             if (customer is null)
                 return CustomerResult.Failure(new[] { "Customer object is required" }, errorCode: 400);
 
@@ -61,7 +62,7 @@ namespace Validation.Services
 
             var entityToEdit = _repo.GetById(id);
 
-            if(entityToEdit is null)
+            if (entityToEdit is null)
                 return CustomerResult.Failure(new[] { $"Customer not found for Id:{id}" }, errorCode: 404);
 
             var customerEntity = MapToEntity(customer);
