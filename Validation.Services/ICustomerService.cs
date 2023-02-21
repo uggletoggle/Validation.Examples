@@ -1,5 +1,5 @@
-﻿using Validation.Domain;
-using Validation.Domain.Responses;
+﻿using Validation.Services.Dtos;
+using Validation.Services.Responses;
 
 namespace Validation.Services
 {

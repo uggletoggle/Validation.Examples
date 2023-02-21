@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Validation.Data;
-using Validation.Domain;
 using Validation.Services;
+using Validation.Services.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +37,7 @@ app.MapPut("/api/customers/{id}", ([FromServices] ICustomerService service, Cust
 
     if (!result.Success && result.ErrorCode == 400)
         return Results.BadRequest(result);
-    
+
     if (!result.Success && result.ErrorCode == 404)
         return Results.NotFound(result);
 
