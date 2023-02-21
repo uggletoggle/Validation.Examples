@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Validation.Data;
-using Validation.Domain;
 using Validation.Services;
+using Validation.Services.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 

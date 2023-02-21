@@ -1,4 +1,4 @@
-﻿using Validation.Domain;
+﻿using Validation.Services.Dtos;
 
 namespace Validation.Services
 {
