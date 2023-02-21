@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Validation.Domain\Validation.Domain.csproj" />
+    <ProjectReference Include="..\Validation.Services\Validation.Services.csproj" />
+  </ItemGroup>
+
+</Project>
