@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation_Naive", "Validation_Naive\Validation_Naive.csproj", "{15945AEC-0E11-45EC-AB83-62F9D9CE7E71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation_Simple", "Validation_Naive\Validation_Simple.csproj", "{15945AEC-0E11-45EC-AB83-62F9D9CE7E71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation.Domain", "Validation.Domain\Validation.Domain.csproj", "{4E02BDA5-868D-48DE-824B-7E9D09D781EF}"
 EndProject

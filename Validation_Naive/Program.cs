@@ -23,14 +23,25 @@ app.MapGet("/api/customers/{id}", ([FromServices] ICustomerService service, int 
 
 app.MapPost("/api/customers", ([FromServices] ICustomerService service, CustomerCreateDto customer) =>
 {
-    service.CreateCustomer(customer);
-    return Results.Ok();
+    var result = service.CreateCustomer(customer);
+
+    if (!result.Success && result.ErrorCode == 400)
+        return Results.BadRequest(result);
+
+    return Results.Ok(result);
 });
 
 app.MapPut("/api/customers/{id}", ([FromServices] ICustomerService service, CustomerCreateDto customer, int id) =>
 {
-    service.EditCustomer(id, customer);
-    return Results.Ok();
+    var result = service.EditCustomer(id, customer);
+
+    if (!result.Success && result.ErrorCode == 400)
+        return Results.BadRequest(result);
+    
+    if (!result.Success && result.ErrorCode == 404)
+        return Results.NotFound(result);
+
+    return Results.Ok(result);
 });
 
 app.Run();

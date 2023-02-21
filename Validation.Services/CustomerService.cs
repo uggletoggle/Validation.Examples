@@ -1,5 +1,7 @@
-﻿using Validation.Data;
+﻿using System.Text.RegularExpressions;
+using Validation.Data;
 using Validation.Domain;
+using Validation.Domain.Responses;
 
 namespace Validation.Services
 {
@@ -12,18 +14,61 @@ namespace Validation.Services
             _repo = repo;
         }
 
-        public void CreateCustomer(CustomerCreateDto customer)
+        public CustomerResult CreateCustomer(CustomerCreateDto customer)
         {
+            if (customer is null)
+                return CustomerResult.Failure(new[] { "Customer object is required" }, errorCode: 400);
+            
+            if(string.IsNullOrEmpty(customer.Name))
+                return CustomerResult.Failure(new[] { "Name is required" }, errorCode: 400);
+            
+            if(string.IsNullOrEmpty(customer.Email))
+                return CustomerResult.Failure(new[] { "Email is required" }, errorCode: 400);
+            
+            if(string.IsNullOrEmpty(customer.Address))
+                return CustomerResult.Failure(new[] { "Address is required" }, errorCode: 400);
+
+            // regex for email
+            var regexEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            if (!regexEmail.IsMatch(customer.Email))
+                return CustomerResult.Failure(new[] { "Email is not valid" }, errorCode: 400);
+
             var customerEntity = MapToEntity(customer);
             _repo.Create(customerEntity);
+
+            return CustomerResult.Ok(null);
         }
 
-        public void EditCustomer(int id, CustomerCreateDto customer)
+        public CustomerResult EditCustomer(int id, CustomerCreateDto customer)
         {
+                
+            if (customer is null)
+                return CustomerResult.Failure(new[] { "Customer object is required" }, errorCode: 400);
+
+            if (string.IsNullOrEmpty(customer.Name))
+                return CustomerResult.Failure(new[] { "Name is required" }, errorCode: 400);
+
+            if (string.IsNullOrEmpty(customer.Email))
+                return CustomerResult.Failure(new[] { "Email is required" }, errorCode: 400);
+
+            if (string.IsNullOrEmpty(customer.Address))
+                return CustomerResult.Failure(new[] { "Address is required" }, errorCode: 400);
+
+            // regex for email
+            var regexEmail = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            if (!regexEmail.IsMatch(customer.Email))
+                return CustomerResult.Failure(new[] { "Email is not valid" }, errorCode: 400);
+
+            var entityToEdit = _repo.GetById(id);
+
+            if(entityToEdit is null)
+                return CustomerResult.Failure(new[] { $"Customer not found for Id:{id}" }, errorCode: 404);
+
             var customerEntity = MapToEntity(customer);
             customerEntity.Id = id;
 
             _repo.Update(customerEntity);
+            return CustomerResult.Ok(null);
         }
 
         public CustomerReadDto? GetCustomerById(int id) => MapToReadDto(_repo.GetById(id));
