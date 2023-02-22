@@ -78,13 +78,7 @@ namespace Validation.Services
             {
                 Name = customer.Name,
                 Email = customer.Email,
-                Address = new()
-                {
-                    City = customer.Address.City,
-                    Street = customer.Address.Street,
-                    ZipCode = customer.Address.ZipCode,
-                    State = customer.Address.State
-                }
+                Addresses = customer.Addresses.Select(MapToAddressEntity).ToArray()
             };
         }
 
@@ -95,17 +89,31 @@ namespace Validation.Services
                 Id = customer.Id,
                 Name = customer.Name,
                 Email = customer.Email,
-                Address = new()
-                {
-                    City = customer.Address.City,
-                    Street = customer.Address.Street,
-                    ZipCode = customer.Address.ZipCode,
-                    State = customer.Address.State
-                }
+                Addresses = customer.Addresses.Select(MapToAddressDto).ToArray()
             };
         }
 
 
+        private AddressDto MapToAddressDto(Address address)
+        {
+            return new AddressDto
+            {
+                City = address.City,
+                Street = address.Street,
+                ZipCode = address.ZipCode,
+                State = address.State
+            };
+        }
 
+        private Address MapToAddressEntity(AddressDto address)
+        {
+            return new Address
+            {
+                City = address.City,
+                Street = address.Street,
+                ZipCode = address.ZipCode,
+                State = address.State
+            };
+        }
     }
 }

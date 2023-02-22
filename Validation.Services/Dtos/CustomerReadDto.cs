@@ -8,6 +8,6 @@
 
         public string Name { get; set; }
 
-        public AddressDto Address { get; set; }
+        public AddressDto[] Addresses { get; set; }
     }
 }

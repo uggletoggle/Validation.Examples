@@ -18,7 +18,7 @@ namespace Validation.Data
             var index = _db.IndexOf(_db.SingleOrDefault(c => c.Id == customer.Id));
 
             _db[index].Email = customer.Email;
-            _db[index].Address = customer.Address;
+            _db[index].Addresses = customer.Addresses;
             _db[index].Name = customer.Name;
         }
 
@@ -37,12 +37,15 @@ namespace Validation.Data
             Id = 1,
             Name = "John",
             Email = "john@testmail.com",
-            Address = new()
+            Addresses = new[]
             {
-                Street = "123 Main St",
-                City = "New York",
-                State = "NY",
-                ZipCode = "12345"
+                new Address
+                {
+                    Street = "123 Main St",
+                    City = "New York",
+                    State = "NY",
+                    ZipCode = "12345"
+                }
             }
         };
 
@@ -51,12 +54,16 @@ namespace Validation.Data
             Id = 2,
             Name = "Jane",
             Email = "jane@testmail.com",
-            Address = new()
+            Addresses = new[]
             {
-                Street = "456 Main St",
-                City = "New York",
-                State = "NY",
-                ZipCode = "456789"
+                new Address
+                {
+                    Street = "456 Main St",
+                    City = "New York",
+                    State = "NY",
+                    ZipCode = "456789"
+                }
+                
             }
         };
         #endregion
