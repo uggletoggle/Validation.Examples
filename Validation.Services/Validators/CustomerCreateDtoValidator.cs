@@ -14,7 +14,12 @@ namespace Validation.Services.Validators
             RuleFor(x => x.Addresses).NotNull()
                 .Must(x => x.Length >= 1 && x.Length <= 3)
                 .WithMessage("The number of addresses must be between 1 and 3");
+            
             RuleForEach(x => x.Addresses).SetValidator(new AddressDtoValidator());
+
+            //RuleFor(x => x.Addresses).NotNull().SetValidator(new AddressesDtoValidator());
+
+
         }
     }
     public class AddressDtoValidator : AbstractValidator<AddressDto>
@@ -25,6 +30,17 @@ namespace Validation.Services.Validators
             RuleFor(x => x.Street).NotEmpty().Length(0, 200);
             RuleFor(x => x.City).NotEmpty().Length(0, 100);
             RuleFor(x => x.ZipCode).NotEmpty().Length(0, 5);
+        }
+    }
+
+    public class AddressesDtoValidator : AbstractValidator<AddressDto[]>
+    {
+        public AddressesDtoValidator()
+        {
+            RuleFor(x => x).NotNull()
+               .Must(x => x.Length >= 1 && x.Length <= 3)
+               .WithMessage("The number of addresses must be between 1 and 3");
+            RuleForEach(x => x).SetValidator(new AddressDtoValidator());
         }
     }
 }
