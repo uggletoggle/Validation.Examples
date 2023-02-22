@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "2dc9f063-fba2-48bc-be97-ebf5d01f1888",
+		"name": "Validation Sample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Naive",
+			"item": [
+				{
+					"name": "Pitfalls",
+					"item": [
+						{
+							"name": "Wrong Email",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"novalidemail\",\r\n    \"name\": \"New Customer\",\r\n    \"address\": \"742 evergreen terrace\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7184/api/customers",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7184",
+									"path": [
+										"api",
+										"customers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Null Fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"test@testmail.com\",\r\n    \"name\": null,\r\n    \"address\": \"742 evergreen terrace\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7184/api/customers",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7184",
+									"path": [
+										"api",
+										"customers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get All Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7184/api/customers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7184/api/customers/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@testmail.com\",\r\n    \"name\": \"New Customer\",\r\n    \"address\": \"742 evergreen terrace\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7184/api/customers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@testmail.com\",\r\n    \"name\": \"Edit Customer\",\r\n    \"address\": \"743 evergreen terrace\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7184/api/customers/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Simple",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testtestmail.com\",\r\n    \"name\": \"New Customer\",\r\n    \"address\": \"742 evergreen terrace\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7184/api/customers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@testmail.com\",\r\n    \"name\": \"Edit Customer\",\r\n    \"address\": \"743 evergreen terrace\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7184/api/customers/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fluent Validation",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testtestmail.com\",\r\n    \"name\": null,\r\n    \"address\": \"742 evergreen terrace\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7184/api/customers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@testmail.com\",\r\n    \"name\": \"Edit Customer\",\r\n    \"address\": \"743 evergreen terrace\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7184/api/customers/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Complex",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@testmail.com\",\r\n    \"name\": \"testname\",\r\n    \"address\": {\r\n        \"street\": \"742 evergreen terrace\",\r\n        \"state\": \"CAN\",\r\n        \"city\": null,\r\n        \"zipCode\": \"12345\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7184/api/customers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@testmail.com\",\r\n    \"name\": \"Edit Customer\",\r\n    \"address\": \"743 evergreen terrace\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7184/api/customers/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7184",
+							"path": [
+								"api",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
